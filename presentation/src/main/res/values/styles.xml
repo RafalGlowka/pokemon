@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Used Android UI kit (community) -->
+
+    <style name="FieldText">
+        <item name="android:textColor">@color/text</item>
+    </style>
+
+    <style name="FieldText.Regular">
+        <item name="android:textSize">@dimen/text_normal</item>
+        <item name="fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="FieldText.Medium">
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="FieldText.Header">
+        <item name="android:textSize">@dimen/text_header</item>
+        <item name="fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="FieldEditText" parent="FieldText.Medium">
+        <item name="android:singleLine">true</item>
+        <item name='android:maxLines'>1</item>
+    </style>
+
+
+    <style name="FieldText.StyledTitle">
+        <item name="android:textSize">@dimen/text_huge</item>
+        <item name="fontFamily">@font/pokemon_hollow</item>
+    </style>
+
+
+</resources>

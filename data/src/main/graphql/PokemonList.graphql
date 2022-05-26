@@ -1,0 +1,23 @@
+query PokemonList {
+    allPokemon {
+        id
+        name
+        games {
+            id
+            name
+        }
+        abilities {
+            name
+        }
+        sprites {
+            front_default,
+            front_female,
+            front_shiny,
+            front_shiny_female,
+            back_default,
+            back_female,
+            back_shiny,
+            back_shiny_female
+        }
+    }
+}

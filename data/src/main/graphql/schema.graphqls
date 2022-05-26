@@ -1,0 +1,259 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+}
+
+directive @cacheControl(maxAge: Int, scope: CacheControlScope) on OBJECT | FIELD_DEFINITION | INTERFACE
+
+"EvolutionCriteria can be one or more of several possible different types"
+union EvolutionCriteria = Gender | Item | Location | Move | OtherEvolutionCriteria | Type
+
+type Ability {
+    description: String
+    effect: String
+    id: Int
+    is_hidden: Boolean
+    name: String
+    "array of Pokemon that can have the queried Ability"
+    pokemon: [Pokemon]
+}
+
+type DexEntry {
+    description: String
+    "game/version the queried DexEntry is from"
+    game: Game
+}
+
+type Dominant_Color {
+    b: Int
+    dark: String
+    g: Int
+    light: String
+    original: String
+    r: Int
+}
+
+type EggGroup {
+    id: Int
+    name: String
+    "array of Pokemon in the queried egg group"
+    pokemon: [Pokemon]
+}
+
+type Game {
+    generation: String
+    id: Int
+    name: String
+    "array of Regions that are found in the queried Game"
+    regions: [Region]
+}
+
+type Gender {
+    id: Int
+    name: String
+}
+
+type Item {
+    bag_pocket: String
+    cost: Int
+    description: String
+    "Use in an evolution_criteria query; returns the name of the evolution criteria that must have been met for the Pokémon to have evolved"
+    effect: String
+    id: Int
+    name: String
+    sprite: String
+}
+
+type Location {
+    "array of games/versions in which pokemon are found at the queried Location"
+    games: [Game]
+    id: Int
+    name: String
+    "array of Pokemon that can be found at the queried Location"
+    pokemon: [Pokemon]
+    region: Region
+}
+
+type Move {
+    accuracy: Int
+    ailment: String
+    "physical or special"
+    damage_class: String
+    description: String
+    "possible status condition effect"
+    effect: String
+    effect_chance: Int
+    id: Int
+    "level, egg, move tutor, tm/hm"
+    learn_methods: [MoveLearnMethod]
+    name: String
+    original_games: [Game]
+    power: Int
+    pp: Int
+    priority: Int
+    type: Type
+}
+
+type MoveDescription {
+    description: String
+    games: [Game]
+}
+
+type MoveLearnMethod {
+    games: [Game]
+    level_learned_at: Int
+    "how the Pokemon learns the queried Move"
+    method: String
+}
+
+type NameAndId {
+    id: Int
+    name: String
+}
+
+type OtherEvolutionCriteria {
+    "example response: time_of_day"
+    evolution_criteria_name: String
+    "example response: night"
+    value: String
+}
+
+"query for an individual Pokemon's info"
+type Pokemon {
+    "array of Abilities that the queried Pokemon can have"
+    abilities(game: String): [Ability]
+    base_experience: Int
+    base_happiness: Int
+    "base stats of the queried Pokemon"
+    base_stats: Stats
+    "capture rate of the queried Pokemon when using a normal Pokeball at full health"
+    capture_rate: Int
+    "basic color of the queried Pokemon"
+    color: String
+    "dominant color of the queried Pokemon's image"
+    dominant_color: Dominant_Color
+    "array of the different EggGroups that the queried Pokemon belongs to"
+    egg_groups: [EggGroup]
+    "the Pokemon at the 'beginning' of the queried Pokemon's evolution chain (i.e. Charmander, even if you requested Charizard)"
+    evolution_chain_start: Pokemon!
+    "array of all criteria that must be met for the queried Pokemon to evolve"
+    evolution_criteria(game: String): [EvolutionCriteria]
+    "what triggers the queried Pokemon to evolve if all evolution criteria have been met"
+    evolution_trigger: String
+    "Pokemon that the queried Pokemon evolves from"
+    evolves_from: Pokemon
+    "array of Pokemon that the queried Pokemon can evolve into"
+    evolves_to: [Pokemon]
+    "array of Games that the queried Pokemon is found in"
+    games: [Game]
+    "percent chance of the queried Pokémon being female (-1 for genderless)"
+    gender_rate: Float
+    "which generation the queried Pokemon debuted in"
+    generation: String
+    genus: String
+    growth_rate: String
+    hatch_counter: Int
+    "height in meters"
+    height: Int
+    id: Int
+    is_baby: Boolean
+    "true if it's the default form, false if it's a variant (i.e. alola, galar, mega, etc)"
+    is_default: Boolean
+    "array of Locations that the queried Pokemon can be found in"
+    locations: [Location]
+    "array of Move objects"
+    moves(game: String!): [Move]
+    name: String
+    nat_dex_num: Int
+    "array of DexEntry objects"
+    pokedex_entries: [DexEntry]
+    shape: String
+    "array of Sprite objects"
+    sprites: Sprites
+    "array of all the different Types of the queried Pokemon"
+    types: [Type]
+    "array of different variant forms of the queried Pokemon"
+    variants: [Pokemon]
+    "weight in kilograms"
+    weight: Int
+}
+
+type Query {
+    ability(game: String, id: Int!): Ability
+    allAbilities: [Ability]
+    allEggGroups: [EggGroup]
+    allGames: [Game]
+    allItems: [Item]
+    allLocations: [Location]
+    allMoves: [Move]
+    "get range of Pokemon starting from start variable"
+    allPokemon(filter: Boolean, limit: Int): [Pokemon]
+    allRegions: [Region]
+    allTypes(end: Int, start: Int): [Type]
+    eggGroup(id: Int!): EggGroup
+    game(id: Int): Game
+    item(id: Int): Item
+    location(id: Int!): Location
+    move(id: Int!): Move
+    pokemon(id: Int!): Pokemon
+    region(id: Int!): Region
+    type(id: Int!): Type
+}
+
+type Region {
+    "array of Games the queried Region is found in"
+    games: [Game]
+    id: Int
+    "array of Locations that are in the queried Region"
+    locations: [Location]
+    name: String
+}
+
+type Sprites {
+    back_default: String
+    back_female: String
+    back_shiny: String
+    back_shiny_female: String
+    front_default: String
+    front_female: String
+    front_shiny: String
+    front_shiny_female: String
+}
+
+type Stats {
+    attack: Int
+    defense: Int
+    hp: Int
+    special_attack: Int
+    special_defense: Int
+    speed: Int
+}
+
+"Pokemon type (i.e. Grass, Electric, Water, etc)"
+type Type {
+    "array of super effective Types that the queried type receives double damage from"
+    double_damage_from: [Type]
+    "array of Types the queried type inflicts double damage upon"
+    double_damage_to: [Type]
+    "array of not very effective Types the queried type receives half damage from"
+    half_damage_from: [Type]
+    "array of Types the queried type inflicts double damage upon"
+    half_damage_to: [Type]
+    id: Int
+    name: String
+    "array of ineffective Types the queried type receives no damage from"
+    no_damage_from: [Type]
+    "array of Types the queried type inflicts no damage upon"
+    no_damage_to: [Type]
+    "array of Pokemon that have the queried Type"
+    pokemon: [Pokemon]
+}
+
+enum CacheControlScope {
+    PRIVATE
+    PUBLIC
+}
+
+"The `Upload` scalar type represents a file upload."
+scalar Upload

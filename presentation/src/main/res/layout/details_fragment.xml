@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.glowka.rafal.pokemon.presentation.flow.dashboard.details.DetailsViewModelToViewInterface" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/margin" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/margin" />
+
+            <include
+                android:id="@+id/header"
+                layout="@layout/field_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:fieldModel="@{viewModel.header}" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image"
+                android:layout_width="0dp"
+                android:layout_height="450dp"
+                android:layout_marginTop="@dimen/margin"
+                android:foregroundGravity="center"
+                android:src="@drawable/loading_animation"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                app:layout_constraintTop_toBottomOf="@id/header"
+                app:loadImage="@{viewModel.image.image}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/name"
+                style="@style/FieldText.StyledTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:gravity="center"
+                android:text="@{viewModel.fullName.text}"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                app:layout_constraintTop_toBottomOf="@+id/image" />
+
+            <include
+                android:id="@+id/abilities"
+                layout="@layout/field_text"
+                style="@style/FieldText.Medium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:gravity="center"
+                app:fieldModel="@{viewModel.abilities}"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                app:layout_constraintTop_toBottomOf="@+id/name" />
+
+            <include
+                android:id="@+id/games"
+                layout="@layout/field_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:gravity="center"
+                app:fieldModel="@{viewModel.games}"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                app:layout_constraintTop_toBottomOf="@+id/abilities" />
+
+            <include
+                android:id="@+id/gallery_label"
+                layout="@layout/field_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:gravity="center"
+                app:fieldModel="@{viewModel.galeryLabel}"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                app:layout_constraintTop_toBottomOf="@+id/games" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/gallery"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                app:layout_constraintTop_toBottomOf="@+id/gallery_label"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

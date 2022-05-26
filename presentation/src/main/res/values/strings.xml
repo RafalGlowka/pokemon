@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pokemon</string>
+    <string name="label_games">Games:</string>
+    <string name="label_abilities">Abilities:</string>
+    <string name="label_gallery">Gallery:</string>
+    <string name="search_by_name_hint">Search Pokemon by name</string>
+    <string name="search_by_name_initial_text" />
+    <string name="missing_favourites">No favourite Pokemons on the list.\nYou can add them on Pokemon details page</string>
+    <string name="missing_results">No results for \"%1$s\" query</string>
+    <string name="status_favs">Favourities: %1$s</string>
+    <string name="status_query">Found: %1$s</string>
+
+    <string name="content_description_close_button">close button</string>
+    <string name="content_description_picture">picture</string>
+</resources>
